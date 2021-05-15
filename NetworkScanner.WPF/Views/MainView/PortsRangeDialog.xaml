@@ -1,0 +1,30 @@
+﻿<Window x:Class="NetworkScanner.WPF.Views.MainView.PortsRangeDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetworkScanner.WPF.Views.MainView"
+        mc:Ignorable="d"
+        Title="PortsRangeDialog" Height="149.364" Width="245.975" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow">
+    <Grid>
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Port :" VerticalAlignment="Center" />
+            <TextBlock Text="All :" Grid.Row="1" VerticalAlignment="Center"/>
+
+            <TextBox x:Name="TextBoxPort" Grid.Column="1" Margin="4" TextChanged="TextBoxPort_TextChanged"/>
+            <CheckBox x:Name="CheckBoxAll" Grid.Column="1" Grid.Row="1" Margin="4"/>
+        </Grid>
+
+        <Button  Content="Ok" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="51,80,0,0" IsDefault="True" Click="ButtonOk_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="131,80,0,0" IsCancel="True" RenderTransformOrigin="0.227,3.25"/>
+    </Grid>
+</Window>

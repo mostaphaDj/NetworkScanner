@@ -1,0 +1,107 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ViewModels="clr-namespace:NetworkScanner.ViewModels" x:Name="window" x:Class="NetworkScanner.WPF.Views.MainView.MainView"
+        mc:Ignorable="d"
+        Title="MainView" Height="496" Width="1103.833">
+    <Window.Resources>
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="buttonStyle">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Width" Value="20" />
+        </Style>
+
+        <DataTemplate x:Key="ButtonScanDataTemplate">
+            <StackPanel Orientation="Horizontal" Margin="2,0,2,0">
+                <TextBlock Text="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" 
+                           FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" 
+                           VerticalAlignment="Center" Margin="3,0,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Window.DataContext>
+        <ViewModels:MainViewModel/>
+    </Window.DataContext>
+    <DockPanel>
+        <StackPanel  DockPanel.Dock="Top" Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Height="32" >
+                <Button x:Name="buttonStart" Content="Start" Tag="&#xE102;" Command="{Binding Commands.StartCommand}" ContentTemplate="{DynamicResource ButtonScanDataTemplate}"/>
+                <Button x:Name="buttonRestore" Content="Restore" Tag="&#xE777;"  Command="{Binding Commands.RestoreCommand}" ContentTemplate="{DynamicResource ButtonScanDataTemplate}"/>
+                <Button x:Name="buttonStop" Content="Stop" Tag="&#xE71A;" Command="{Binding Commands.StopCommand}" ContentTemplate="{DynamicResource ButtonScanDataTemplate}"/>
+                <Button x:Name="buttonSuspend" Content="Suspend" Tag="&#xE769;" Command="{Binding Commands.SuspendCommand}" ContentTemplate="{DynamicResource ButtonScanDataTemplate}"/>
+                <Button x:Name="buttonResume" Content="Resume" Tag="&#xE769;&#xE893;" Command="{Binding Commands.ResumeCommand}" ContentTemplate="{DynamicResource ButtonScanDataTemplate}"/>
+                <Button x:Name="buttonClear" Content="Clear" Tag="&#xE894;" Command="{Binding Commands.ClearResultCommand}" ContentTemplate="{DynamicResource ButtonScanDataTemplate}"/>
+            </StackPanel>
+
+            <StackPanel x:Name="IPRange" Margin="4" Height="auto" Orientation="Horizontal">
+                <ListBox x:Name="listBoxIPRange" Width="200"  ItemsSource="{Binding IPAddresses.Ranges}" SelectionChanged="listBoxIPRange_SelectionChanged">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                            <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                <StackPanel Margin="0,0,0,4">
+                    <Button x:Name="buttonAddIP" Content="&#xE109;" Style="{StaticResource buttonStyle}" Click="buttonAddIP_Click" Command="{Binding Commands.AddIPCommand}" />
+                    <Button x:Name="buttonRemoveIP" Content="&#xE108;" Style="{StaticResource buttonStyle}" Command="{Binding Commands.RemoveIPCommand}" CommandParameter="{Binding SelectedItem, ElementName=listBoxIPRange}" />
+                    <Button x:Name="buttonEditIP" Content="&#xE70F;" Style="{StaticResource buttonStyle}" Click="buttonEditIP_Click" Command="{Binding Commands.EditIPCommand}"  CommandParameter="{Binding SelectedItem, ElementName=listBoxIPRange}"/>
+                    <Button x:Name="buttonUpIP" Content="&#xE74A;" Style="{StaticResource buttonStyle}" Command="{Binding Commands.UpIPCommand}"  CommandParameter="{Binding SelectedItem, ElementName=listBoxIPRange}"/>
+                    <Button x:Name="buttonDownIP" Content="&#xE74B;" Style="{StaticResource buttonStyle}" Command="{Binding Commands.DownIPCommand}"  CommandParameter="{Binding SelectedItem, ElementName=listBoxIPRange}"/>
+                    <Button x:Name="buttonClearIP" Content="&#xE894;" Style="{StaticResource buttonStyle}" Command="{Binding Commands.ClearIPCommand}" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel x:Name="Ports" Margin="4">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                    <Button x:Name="buttonAddPort" Content="&#xE109;" Style="{StaticResource buttonStyle}" Click="buttonAddPort_Click" Command="{Binding Commands.AddPortCommand}" />
+                    <Button x:Name="buttonRemovePort" Content="&#xE108;" Style="{StaticResource buttonStyle}" Command="{Binding Commands.RemovePortCommand}" CommandParameter="{Binding SelectedItem, ElementName=listBoxPorts}" />
+                    <Button x:Name="buttonEditPort" Content="&#xE70F;" Style="{StaticResource buttonStyle}" Click="buttonEditPort_Click" Command="{Binding Commands.EditPortCommand}"  CommandParameter="{Binding SelectedItem, ElementName=listBoxPorts}"/>
+                    <Button x:Name="buttonUpPort" Content="&#xE74A;" Style="{StaticResource buttonStyle}" Command="{Binding Commands.UpPortCommand}"  CommandParameter="{Binding SelectedItem, ElementName=listBoxPorts}"/>
+                    <Button x:Name="buttonDownPort" Content="&#xE74B;" Style="{StaticResource buttonStyle}" Command="{Binding Commands.DownPortCommand}"  CommandParameter="{Binding SelectedItem, ElementName=listBoxPorts}"/>
+                    <Button x:Name="buttonClearPort" Content="&#xE894;" Style="{StaticResource buttonStyle}" Command="{Binding Commands.ClearPortCommand}" />
+                </StackPanel>
+                <ListBox x:Name="listBoxPorts" Height="100" Width="120" ItemsSource="{Binding Ports}" SelectionChanged="listBoxPorts_SelectionChanged"/>
+            </StackPanel>
+
+            <StackPanel Margin="4">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                <TextBlock Text="Threads N: " Height="20"/>
+                <TextBox Text="{Binding Scanner.PingerCount}" Width="50" Height="20"/>
+                <Button x:Name="buttonUp" Content="&#xE74A;" Style="{StaticResource buttonStyle}" />
+                <Button x:Name="buttonDown" Content="&#xE74B;" Style="{StaticResource buttonStyle}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="Timeout :   " Height="20"/>
+                <TextBox Text="{Binding Scanner.Timeout}" Width="50" Height="20"/>
+                <Button x:Name="button2Up" Content="&#xE74A;" Style="{StaticResource buttonStyle}" />
+                <Button x:Name="button2Down" Content="&#xE74B;" Style="{StaticResource buttonStyle}" />
+            </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="IP Address: " />
+            <TextBlock Text="{Binding IPAddresses.Current, Mode=OneWay}" Width="80"/>
+            <Separator/>
+            <TextBlock Text="Pinged Count: "/>
+            <TextBlock Text="{Binding IPAddresses.PingedCount, Mode=OneWay}" Width="50"/>
+            <Separator/>
+            <TextBlock Text="Replied Count: " />
+            <TextBlock Text="{Binding IPAddresses.RepliedCount, Mode=OneWay}" Width="40"/>
+            <Separator/>
+            <ProgressBar Width="400" Height="15" Value="{Binding IPAddresses.PercentComplete, Mode=OneWay}" />
+        </StatusBar>
+        <Grid DockPanel.Dock="Bottom">
+            <ListView x:Name="ListViewResult" ItemsSource="{Binding Devices}" />
+        </Grid>
+
+    </DockPanel>
+</Window>

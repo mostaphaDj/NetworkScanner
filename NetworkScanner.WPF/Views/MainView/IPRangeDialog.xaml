@@ -1,0 +1,38 @@
+﻿<Window x:Name="window" x:Class="NetworkScanner.WPF.Views.MainView.IPRangeDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetworkScanner.WPF.Views.MainView"
+        mc:Ignorable="d" 
+        Title="IPRangeDialog" Height="165" Width="401.5" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" Loaded="Window_Loaded">
+    <Grid>
+        <StackPanel Margin="20">
+            <StackPanel Orientation="Horizontal" Margin="4">
+                <RadioButton x:Name="RadioButtonIP" Content="IP Address " GroupName="1" VerticalAlignment="Center" Checked="RadioButton_Checked" />
+                <ComboBox x:Name="ComboBoxMyIp" Width="260" Padding="4" IsEditable="True"  ItemsSource="{Binding MyIPAddresses, ElementName=window}" DisplayMemberPath="Value" SelectedValuePath="Key" 
+                          TextBoxBase.TextChanged="ComboBoxMyIp_Changed" SelectionChanged="ComboBoxMyIp_Changed"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="4">
+                <RadioButton x:Name="RadioButtonRange" Content="Range IPs  " GroupName="1" VerticalAlignment="Center" Checked="RadioButtonRange_Checked"/>
+                <StackPanel Orientation="Horizontal" IsEnabled="{Binding IsChecked, ElementName=RadioButtonRange}">
+                    <TextBox x:Name="TextBoxForm" Width="90" TextChanged="TextBoxRange_TextChanged" Padding="4"/>
+
+                    <TextBlock Text=" &#xE111; " FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"/>
+                    <TextBox x:Name="TextBoxTo" Width="90" TextChanged="TextBoxRange_TextChanged" Padding="4"/>
+
+                    <ComboBox x:Name="ComboBoxClass" Padding="4" Width="62"  SelectionChanged="ComboBoxClass_SelectionChanged">
+                        <ComboBoxItem Content="Class A (x.0.0.0)"/>
+                        <ComboBoxItem Content="Class B (x.x.0.0)"/>
+                        <ComboBoxItem Content="Class C (x.x.x.0)"/>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+
+        <Button Content="Ok" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="204,95,0,0" IsDefault="True" Click="ButtonOk_Click" IsEnabled="{Binding isValid, ElementName=window}"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="284,95,0,0" IsCancel="True" RenderTransformOrigin="0.227,3.25"/>
+    </Grid>
+</Window>

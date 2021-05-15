@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NetworkScanner", "NetworkScanner\NetworkScanner.shproj", "{A6AC8B17-2D09-4BF9-9865-ADB25D84876C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkScanner.WPF", "NetworkScanner.WPF\NetworkScanner.WPF.csproj", "{2C7A795B-2222-4DEF-9D1C-5866E53259B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkScanner.WPF.Test", "NetworkScanner.WPF.Test\NetworkScanner.WPF.Test.csproj", "{21FFD44C-4474-421F-9620-2A83798E1CCF}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NetworkScanner\NetworkScanner.projitems*{2c7a795b-2222-4def-9d1c-5866e53259b3}*SharedItemsImports = 4
+		NetworkScanner\NetworkScanner.projitems*{a6ac8b17-2d09-4bf9-9865-adb25d84876c}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C7A795B-2222-4DEF-9D1C-5866E53259B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C7A795B-2222-4DEF-9D1C-5866E53259B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C7A795B-2222-4DEF-9D1C-5866E53259B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C7A795B-2222-4DEF-9D1C-5866E53259B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21FFD44C-4474-421F-9620-2A83798E1CCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21FFD44C-4474-421F-9620-2A83798E1CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21FFD44C-4474-421F-9620-2A83798E1CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21FFD44C-4474-421F-9620-2A83798E1CCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78C9C3AB-BFE3-444B-A2B9-323D1059459B}
+	EndGlobalSection
+EndGlobal
